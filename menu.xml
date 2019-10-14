@@ -68,16 +68,16 @@
 
         <menuitem 
             id="menu_academic_course" 
-            name="Course Om" 
+            name="Course" 
             parent="academic_1" 
             action="action_course_list" 
             sequence="20"/>  
 
         <menuitem
             id="menu_academic_session"
-            name="Session Om"
+            name="Session"
             parent="academic_1"
-            action="action_session_list1"
+            action="action_session_list"
             sequence="30"/>
 
         <menuitem id="menu_academic_attendee"
