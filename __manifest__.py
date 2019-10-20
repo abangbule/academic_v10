@@ -15,7 +15,10 @@
       "course.xml",
       "session.xml",
       "attendee.xml",
-      "partner.xml"
+      "partner.xml",
+      "security/group.xml",
+      "security/ir.model.access.csv",
+      "wizard/create_attendee.xml",
    ],
    "installable": True,
    "auto_install": False,

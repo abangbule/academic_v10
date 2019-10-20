@@ -26,6 +26,34 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Session Form">
+                    <header>
+                        <!-- hardcode workflow -->
+                        <button string="Confirm" type="object"  
+                                name="action_confirm"
+                                groups="academic.group_manager"
+                                states="draft" />
+                        <button string="Mark as Done" type="object" 
+                                name="action_done"
+                                groups="academic.group_manager"
+                                states="confirmed" />
+                        <button string="Reset to Draft" type="object" 
+                                name="action_draft"
+                                groups="academic.group_manager"
+                                states="confirmed,done" />
+                        
+                        <!-- workflow menggunakan setting bawaan odoo  -->
+                        <!-- <button string="Confirm" type="workflow"
+                            name="signal_confirm"
+                            states="draft" />
+                        <button string="Mark as Done" type="workflow"
+                            name="signal_done"
+                            states="confirmed" />
+                        <button string="Reset to draft" type="workflow"
+                            name="signal_draft"
+                            states="confirmed,done" /> -->
+
+                        <field name="state" widget="statusbar" /> 
+                    </header> 
                     <sheet>
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only" string="Session" />
@@ -39,6 +67,8 @@
                                 <field name="instructor_id"
                                     domain="['|',('is_instructor', '=', True), ('category_id', '=', 'Mentor')]"/>
                                 <field name="start_date"/>
+                                <field name="image_small" 
+                                    class="oe_left oe_avatar"/>
                             </group>
                             <group>
                                 <field name="duration"/>

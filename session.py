@@ -1,6 +1,9 @@
 from odoo import api, fields, models, _
 import time
 
+SESSION_STATES =[('draft','Draft'),('confirmed','Confirmed'),
+                 ('done','Done')]
+
 class Session(models.Model):
     _name = 'academic.session'
     
@@ -18,6 +21,27 @@ class Session(models.Model):
 
      
     taken_seats = fields.Float(compute="_calc_taken_seats", string="Taken Seat", required=False, )
+
+    image_small  = fields.Binary(string="Image Small",  )
+
+    state = fields.Selection(string="State", selection=SESSION_STATES,
+                            required=True,
+                            readonly=True,
+                            default=SESSION_STATES[0][0])
+
+    # workflow
+    @api.multi
+    def action_draft(self):
+        self.state = SESSION_STATES[0][0]
+        
+    @api.multi
+    def action_confirm(self):
+        self.state = SESSION_STATES[1][0]
+        
+    @api.multi
+    def action_done(self):
+        self.state = SESSION_STATES[2][0]
+
 
     @api.depends('attendee_ids','seats')
     def _calc_taken_seats(self):
